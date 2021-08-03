@@ -388,6 +388,16 @@ module.exports = (table, players, action) => {
       }
     }
   }
+  
+  if (type === CHECKFOLD) {
+    checkPlayersTurn();
+    let bet = active() && (active().bet || 0);
+    if (maxBet - bet === 0) {
+      type = CALL;
+    } else {
+      type = FOLD;
+    }
+  }
 
   if (type === FOLD) {
     checkPlayersTurn();
@@ -406,16 +416,6 @@ module.exports = (table, players, action) => {
       round = SHOWDOWN;
       setActive();
       newRoundRequest = true;
-    }
-  }
-  
-  if (type === CHECKFOLD) {
-    checkPlayersTurn();
-    let bet = active() && (active().bet || 0);
-    if (maxBet - bet === 0) {
-      type = CALL;
-    } else {
-      type = FOLD;
     }
   }
 
