@@ -27,7 +27,7 @@ module.exports = async db => {
       await action(db, {
         playerId,
         tableId,
-        type: FOLD,
+        type: CHECKFOLD,
         autofoldCount
       });
       console.log("[fold]", playerId);
