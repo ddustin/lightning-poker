@@ -408,6 +408,16 @@ module.exports = (table, players, action) => {
       newRoundRequest = true;
     }
   }
+  
+  if (type === CHECKFOLD) {
+    checkPlayersTurn();
+    let bet = active() && (active().bet || 0);
+    if (maxBet - bet === 0) {
+      type = CALL;
+    } else {
+      type = FOLD;
+    }
+  }
 
   if (type === CALL) {
     checkPlayersTurn();
